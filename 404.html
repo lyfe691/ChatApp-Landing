@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>404 - Page Not Found</title>
+</head>
+<style>
+    button.gb-btn {
+        cursor: pointer ;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 26em;
+        width: 273px; 
+        height: auto;
+        padding: 0.5em 1em;
+        font-size: 1.2em;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.1); /* Slight background */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20em;
+        opacity: 0;
+        animation: fadeInDownload 2s ease-out 2.5s forwards;
+    }
+
+    @keyframes fadeInDownload {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    button.contact-btn::before,
+    button.gb-btn::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 20em;
+        width: 100%;
+        height: 100%;
+        background: #c2ccff91 radial-gradient(farthest-side at 50% 100%, #c2ccff, transparent);
+        opacity: 0.1;
+        transition: all 0.4s ease-in-out;
+    }
+
+    button.contact-btn:hover::before,
+    button.gb-btn:hover::before {
+        background: #c2ccff1e radial-gradient(farthest-side at 50% 100%, #c2ccff, transparent);
+        opacity: 0.3;
+    }
+
+    .contact-btn .glow,
+    .gb-btn .glow {
+        --border-width: 1px;
+        --loop-cycle: 24s;
+        position: absolute;
+        inset: calc(var(--border-width)* -1);
+        border-radius: 50px;
+        border: var(--border-width) solid transparent;
+        -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+        mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+        -webkit-mask-clip: padding-box, border-box;
+        mask-clip: padding-box, border-box;
+        -webkit-mask-composite: source-in, xor;
+        mask-composite: intersect;
+        pointer-events: none;
+    }
+
+    button.contact-btn:hover .glow,
+    button.gb-btn:hover .glow {
+        --loop-cycle: 2s;
+    }
+
+    .contact-btn .glow::after,
+    .contact-btn .glow::before,
+    .gb-btn .glow::after,
+    .gb-btn .glow::before {
+        content: "";
+        height: 100%;
+        offset-anchor: 100% 50%;
+        background: radial-gradient(circle at 50% 50%, hsla(0, 0%, 100%, 0.75), transparent 50%), radial-gradient(circle at 50% 50%, #c2ccff 50%, transparent);
+        opacity: 0.4;
+        offset-path: rect(0 100% 100% 0 round 33px);
+        position: absolute;
+        display: inline-block;
+        -webkit-animation: loop 4s linear infinite;
+        animation: loop var(--loop-cycle) linear infinite;
+        aspect-ratio: 1 / 1;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .contact-btn .glow::before,
+    .gb-btn .glow::before {
+        animation-delay: calc(var(--loop-cycle) / -2);
+    }
+
+    .contact-btn-content,
+    .gb-btn-content {
+        background: linear-gradient(0deg, #d8ecf8, #98c0ef);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.2em;
+        line-height: 142%;
+        display: block; 
+        width: 100%;
+    }
+
+    button.contact-btn:hover .glow::after,
+    button.contact-btn:hover .glow::before,
+    button.gb-btn:hover .glow::after,
+    button.gb-btn:hover .glow::before {
+        opacity: 0.6;
+    }
+
+    @keyframes loop {
+        100% {
+            offset-distance: 100%;
+        }
+    }
+
+    body.gold .gb-btn {
+        background: rgba(18, 21, 33, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 217, 10, 0.2);
+        color: #d8bd10;
+    }
+
+    body.gold .gb-btn .glow {
+        box-shadow: 0 0 10px rgba(255, 217, 10, 0.8), 0 0 20px rgba(255, 217, 10, 0.8);
+    }
+
+    body.gold .gb-btn:hover .glow {
+        --loop-cycle: 2s;
+    }
+
+    body.gold .gb-btn:hover {
+        background: rgba(18, 21, 33, 0.7);
+        border-color: rgba(255, 217, 10, 1);
+
+    }
+
+    body.gold .gb-btn .glow::before,
+    body.gold .gb-btn .glow::after {
+        background: radial-gradient(circle at 50% 50%, hsla(0, 0%, 0%, 0.75), transparent 50%), radial-gradient(circle at 50% 50%, #000 50%, transparent);
+    }
+
+    body.gold .gb-btn:hover .glow::before,
+    body.gold .gb-btn:hover .glow::after {
+        background: radial-gradient(circle at 50% 50%, hsla(0, 0%, 0%, 0.75), transparent 50%), radial-gradient(circle at 50% 50%, #000 50%, transparent);
+    }
+
+    button.gb-btn:hover .gb-btn-content {
+        background: none;
+        -webkit-text-fill-color: #98c0ef;
+    }
+
+    body.gold .gb-btn:hover .gb-btn-content {
+        background: none;
+    
+    }
+</style>
+  <body>
+      <!-- design inspired by https://www.authkit.com/ -->
+      <div class="header">
+          <h2><a href="https://yanissebastianzuercher.ch" target="_blank" rel="noopener noreferrer">lyfe</a></h2>
+          <div class="mid-spot" onclick="document.body.classList.toggle('gold');"></div>
+          <a href="https://github.com/lyfe691/ChatApp" target="_blank" rel="noopener noreferrer">
+              <button class="contact-btn">
+                  <span class="glow"></span>
+                  <span class="contact-btn-content">GitHub</span>
+              </button>
+          </a>
+        
+          <div class="spotlight">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+      </div>
+      
+      <canvas id="particleCanvas"></canvas>
+      
+      <div class="accent-lines">
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+      </div>
+      <div class="heroSubP">
+          <p>You're lost...</p>
+      </div>
+      <div class="hero">
+          <div class="heroT">
+              <h2>404</h2>
+              <h2>404</h2>
+          </div>
+      </div>
+      <p class="heroP">To return to the homepage, <br>
+        click on the button below.</p>
+        <a href="https://chat-app.ch">
+            <button class="gb-btn">
+                <span class="glow"></span>
+                <span class="gb-btn-content">Go to homepage</span>
+            </button>
+        </a>
+      <div class="mountains">
+          <div></div>
+          <div></div>
+          <div></div>
+      </div>
+      <div class="hero-spacer"></div>
+      
+      <div class="content-section">
+          <div class="content-acc">
+            <div></div>
+            <div></div>
+          </div>
+          <p class="subt">&copy; 2024 Yanis Sebastian Zürcher</p>
+      </div>
+
+  </body>
+  <script src="main.js"></script>
+</html>
