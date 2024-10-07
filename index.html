@@ -4,77 +4,299 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="style.css">
-      <script src="main.js"></script>
+      <script src="main.js" defer></script>
       <link rel="shortcut icon" href="assets/saturn.png" type="image/x-icon">
       <link rel="icon" href="assets/saturn.png" type="image/x-icon">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <title>Landing - ChatApp</title>
-  </head>
+      <style>
+        .download-modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation-duration: 0.5s;
+        }
+  
+        .download-modal.fade-in {
+            animation: fadeIn 0.5s;
+        }
+
+        .download-modal.fade-out {
+            animation: fadeOut 0.5s;
+        }
+  
+        .modal-content {
+            position: relative;
+            padding: 2.5em;
+            background: #1c1f2a;
+            width: 80%;
+            max-width: 450px;
+            border-radius: 25px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            color: #d8ecf8;
+            animation: scaleIn 0.5s;
+        }
+  
+        .styled-modal {
+            border: 2px solid #4a90e2;
+        }
+  
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #d8ecf8;
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+  
+        .close-btn:hover {
+            color: #ffffff;
+        }
+  
+        .download-confirm-btn {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 0.8em 2em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+  
+        .download-confirm-btn:hover {
+            background-color: #0a3963;
+        }
+  
+        .github-link {
+            display: block;
+            margin-top: 1em;
+            font-size: 0.9em;
+            color: #9dc3f7;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+  
+        .github-link:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+  
+        .version-select {
+            margin: 1.5em 0;
+        }
+  
+        .version-select label {
+            color: #d8ecf8;
+            margin-right: 0.5em;
+            font-weight: bold;
+        }
+  
+        .version-select select {
+            background: #1c1f2a;
+            color: #d8ecf8;
+            border: 2px solid #4a90e2;
+            border-radius: 15px;
+            padding: 0.5em;
+        }
+  
+        .download-note {
+            margin-top: 1.5em;
+            padding: 1em;
+            background: #2a2d3a;
+            border-radius: 10px;
+            border: 1px solid #4a90e2;
+            color: #9dc3f7;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .download-note i {
+            margin-right: 0.7em;
+            font-size: 1.4em;
+        }
+
+        .download-note-text {
+            line-height: 1.5;
+        }
+  
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+  
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+  
+        @keyframes scaleIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        
+        body.gold #downloadModal, body.gold #downloadModal * {
+            filter: none !important;
+            color: #d8ecf8 !important;
+            text-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        body.gold .styled-modal,
+        body.gold .download-confirm-btn,
+        body.gold .version-select select,
+        body.gold .download-note {
+            border-color: #d8bd10;
+        }
+
+        body.gold .download-confirm-btn {
+            background-color: #a39327;
+        }
+
+        body.gold .download-confirm-btn:hover {
+            background-color: #4d3f08;
+        }
+    </style>
   <body>
       <!-- design inspired by https://www.authkit.com/ -->
-  <div class="header">
-      <h2><a href="https://yanissebastianzuercher.ch" target="_blank" rel="noopener noreferrer">lyfe</a></h2>
-      <div class="mid-spot" onclick="document.body.classList.toggle('gold');"></div>
-      <a href="https://github.com/lyfe691/ChatApp" target="_blank" rel="noopener noreferrer">
-          <button class="contact-btn">
-              <span class="glow"></span>
-              <span class="contact-btn-content">GitHub</span>
-          </button>
-      </a>
-    
-      <div class="spotlight">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="header">
+          <h2><a href="https://yanissebastianzuercher.ch" target="_blank" rel="noopener noreferrer">lyfe</a></h2>
+          <div class="mid-spot" onclick="document.body.classList.toggle('gold');"></div>
+          <a href="https://github.com/lyfe691/ChatApp" target="_blank" rel="noopener noreferrer">
+              <button class="contact-btn">
+                  <span class="glow"></span>
+                  <span class="contact-btn-content">GitHub</span>
+              </button>
+          </a>
+        
+          <div class="spotlight">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
       </div>
-    </div>
-    
-    <canvas id="particleCanvas"></canvas>
-    
-    <div class="accent-lines">
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      
+      <canvas id="particleCanvas"></canvas>
+      
+      <div class="accent-lines">
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
       </div>
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="heroSubP">
+          <p>Introducing</p>
       </div>
-    </div>
-    <div class="heroSubP">
-      <p>Introducing</p>
-    </div>
-    <div class="hero">
-      <div class="heroT">
-        <h2>ChatApp</h2>
-        <h2>ChatApp</h2>
+      <div class="hero">
+          <div class="heroT">
+              <h2>ChatApp</h2>
+              <h2>ChatApp</h2>
+          </div>
       </div>
-    </div>
-    <p class="heroP">Your local ChatApp, <br>
-      Chat with everyone in your network.</p>
-  <a href="https://github.com/lyfe691/ChatApp/releases" target="_blank">
-    <button class="download-btn">
-      <span class="glow"></span>
-      <span class="download-btn-content">Download</span>
-    </button>
-  </a>
-    <div class="mountains">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="hero-spacer"></div>
-    
-    <div class="content-section">
-      <div class="content-acc">
-        <div></div>
-        <div></div>
+      <p class="heroP">Your local ChatApp, <br>
+        Chat with everyone in your network.</p>
+      <button class="download-btn" onclick="openDownloadModal()">
+          <span class="glow"></span>
+          <span class="download-btn-content">Download</span>
+      </button>
+      <div class="mountains">
+          <div></div>
+          <div></div>
+          <div></div>
       </div>
-      <p class="subt">&copy; 2024 Yanis Sebastian Zürcher</p>
-    </div>
+      <div class="hero-spacer"></div>
+      
+      <div class="content-section">
+          <div class="content-acc">
+            <div></div>
+            <div></div>
+          </div>
+          <p class="subt">&copy; 2024 Yanis Sebastian Zürcher</p>
+      </div>
+
+      <!-- Download Modal -->
+      <div id="downloadModal" class="download-modal">
+          <div class="modal-content styled-modal">
+              <span class="close-btn" onclick="closeDownloadModal()">&times;</span>
+              <h2>Download ChatApp</h2>
+              <div class="version-select">
+                  <label for="version">Select Version:</label>
+                  <select id="version">
+                      <option value="v1.0.6">v1.0.6</option>
+                      <option value="v1.0.5">v1.0.5</option>
+                  </select>
+              </div>
+              <button class="download-confirm-btn" onclick="downloadVersion()">Download Now</button>
+              <a href="https://github.com/lyfe691/ChatApp/releases" target="_blank" class="github-link">GitHub Releases</a>
+              <div class="download-note">
+                  <i class="fas fa-info-circle"></i>
+                  <div class="download-note-text">If you feel unsafe downloading the ZIP file directly, you can visit the GitHub Releases page.</div>
+              </div>
+          </div>
+      </div>
   </body>
+  <script>
+      function openDownloadModal() {
+          const modal = document.getElementById('downloadModal');
+          modal.style.display = 'flex';  
+          modal.classList.remove('fade-out');
+          modal.classList.add('fade-in');
+      }
+
+      function closeDownloadModal() {
+          const modal = document.getElementById('downloadModal');
+          modal.classList.remove('fade-in');
+          modal.classList.add('fade-out');
+          setTimeout(() => {
+              modal.style.display = 'none';  
+          }, 500);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+          const modal = document.getElementById('downloadModal');
+          modal.style.display = 'none';
+      });
+
+      function downloadVersion() {
+          const versionSelect = document.getElementById('version');
+          const selectedVersion = versionSelect.value;
+          let downloadLink = '';
+
+          if (selectedVersion === 'v1.0.5') {
+              downloadLink = 'https://github.com/lyfe691/ChatApp/archive/refs/tags/pre_v1.0.5.zip';
+          } else if (selectedVersion === 'v1.0.6') {
+              downloadLink = 'https://github.com/lyfe691/ChatApp/archive/refs/tags/pre_v1.0.6.zip';
+          }
+
+          if (downloadLink) {
+              const downloadAnchor = document.createElement('a');
+              downloadAnchor.href = downloadLink;
+              downloadAnchor.download = '';
+              downloadAnchor.click();
+          }
+      }
+  </script>
+  
 </html>
