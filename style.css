@@ -1082,7 +1082,7 @@ p {
     display: flex;
     justify-content: center;
     opacity: 0;
-    animation: fadeInContent 1s ease-out 3.7s forwards; /* Slightly delayed from parent */
+    animation: fadeInContent 1s ease-out 3.7s forwards;
 }
 
 .content-section .content-acc div {
