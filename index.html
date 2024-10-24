@@ -1303,6 +1303,7 @@ p {
             background-color: #4d3f08;
         }
     </style>
+    </head>
   <body>
       <!-- design inspired by https://www.authkit.com/ -->
       <div class="header">
@@ -1389,6 +1390,7 @@ p {
               <div class="version-select">
                   <label for="version">Select Version:</label>
                   <select id="version">
+                       <option value="v1.0.7">v1.0.7</option>
                       <option value="v1.0.6">v1.0.6</option>
                       <option value="v1.0.5">v1.0.5</option>
                   </select>
@@ -1401,7 +1403,6 @@ p {
               </div>
           </div>
       </div>
-  </body>
   <script>
       function openDownloadModal() {
           const modal = document.getElementById('downloadModal');
@@ -1433,6 +1434,8 @@ p {
               downloadLink = 'https://github.com/lyfe691/ChatApp/archive/refs/tags/pre_v1.0.5.zip';
           } else if (selectedVersion === 'v1.0.6') {
               downloadLink = 'https://github.com/lyfe691/ChatApp/archive/refs/tags/pre_v1.0.6.zip';
+          } else if (selectedVersion === 'v1.0.7') {
+            downloadLink = 'https://github.com/lyfe691/ChatApp/archive/refs/tags/pre_v1.0.7.zip';
           }
 
           if (downloadLink) {
@@ -1444,4 +1447,6 @@ p {
       }
   </script>
   
+    
+  </body>
 </html>
